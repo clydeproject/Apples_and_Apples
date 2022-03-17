@@ -58,6 +58,7 @@ skin_args = {
     "classic":["classic","#","X","O",objects.classic_ascii_preview],
     }
 
+#commands = []
 
 if len(board_chars) == 2 and board_chars[1] == "classic":
     board_chars = skin_args["classic"]
@@ -102,11 +103,15 @@ y_pos = []
 rounds = 1
 
 def classify_input(string):
-    for index,letter in enumerate(string):
-        if letter == ",":
-            x_pos.append(int(string[0:index]))
-            y_pos.append(int(string[index+1:]))
-            break
+    if string == "/ff":
+        os._exit(0)
+    else:
+        for index,letter in enumerate(string):
+            if letter == ",":
+                x_pos.append(int(string[0:index]))
+                y_pos.append(int(string[index+1:]))
+                break
+    
 
 def reset_game():
     global winner,game_state,whos_turn,rounds,x_pos,y_pos#re write line 
