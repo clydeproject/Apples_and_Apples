@@ -97,13 +97,13 @@ board1 = objects.Board(
 tryagain = "y"
 winner = ""
 game_state = True#is false when game is over
-whos_turn = [True,]
+whos_turn = True
 x_pos = []
 y_pos = []
 rounds = 1
 
 def classify_input(string):
-    if string == "/ff":
+    if string == "ff":
         os._exit(0)
     else:
         for index,letter in enumerate(string):
@@ -117,7 +117,7 @@ def reset_game():
     global winner,game_state,whos_turn,rounds,x_pos,y_pos#re write line 
     winner = ""
     game_state = True
-    whos_turn = [True,]
+    whos_turn = True
     x_pos = []
     y_pos = []
     rounds = 1
@@ -172,14 +172,14 @@ while True:
             
             print(f"\nROUND - {rounds}")
 
-            if whos_turn[len(whos_turn)-1]:
+            if whos_turn:
                 classify_input(input(f"{player1.name}'s turn : "))
                 
                 player1.make_move(board1,
                     x=x_pos[len(x_pos)-1],
                     y=y_pos[len(y_pos)-1],
                 )
-                whos_turn.append(player1.apple_colour)
+                whos_turn = False
                 rounds+=1
                 
                 skin_args[board_chars[0]][4](board1)
@@ -194,7 +194,7 @@ while True:
                     y=y_pos[len(y_pos)-1],
                 )
                     
-                whos_turn.append(player2.apple_colour)
+                whos_turn = True
                 rounds+=1
 
                 skin_args[board_chars[0]][4](board1)
